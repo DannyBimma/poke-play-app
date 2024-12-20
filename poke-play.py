@@ -26,6 +26,27 @@ class PokedexAPI:
         except requests.RequestException:
             # Default to total up to Gen 8 if API call fails
             return 898
+        
+    # Get specific Pokémon (by ID) to loop later
+    def get_pokes(self, pokemon_id: int) -> Optional[Pokemon]:
+        try:
+            response = self.session.get(
+                f"{self.url}/pokemon/{pokemon_id}",
+                timeout=69 #lol
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            return Pokemon(
+                name=data["name"].capitalize(),
+                id=data["id"],
+                types=[t["type"]["name"] for t in data["types"]]
+            )
+            
+        except requests.RequestException as e:
+            print(f"Error: Could NOT fetch Pokemon API data: {e}", file=sys.stderr)
+            return None
+
 
 
 def main():
