@@ -64,8 +64,16 @@ class PokedexAPI:
                 booster_pck.append(pokemon)
                 
         return booster_pck
+    
 
-
+# Print Booster Packs
+def display_pck(pokemon_list: List[Pokemon]):
+    print("\n🎊 Booster Pack Opened 🎊\n")
+    print("You got:")
+    for pokemon in pokemon_list:
+        types_str = "/".join(pokemon.types)
+        print(f"• {pokemon.name} (#{pokemon.id}) - Type: {types_str}")
+    print()
 
 def main():
     api = PokedexAPI()
