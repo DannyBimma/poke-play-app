@@ -49,21 +49,21 @@ class PokedexAPI:
         
     # Get 5 random Pokémon for booster that always includes Mew "DannyBimma 😏"
     def load_booster_pck(self, count: int, mew: bool = False) -> List[Pokemon]:
-        pokemon_list = []
+        booster_pck = []
         
         if mew:
             mew = self.get_pokes(151)  # Mew Pokédex ID is 151
             if mew:
-                pokemon_list.append(mew)
+                booster_pck.append(mew)
                 count -= 1  # Decrease number of Pokemon needed if Mew included
         
-        while len(pokemon_list) < count:
+        while len(booster_pck) < count:
             poke_id = random.randint(1, self.all_de_pokemon)
             pokemon = self.get_pokes(poke_id)
-            if pokemon and pokemon not in pokemon_list:
-                pokemon_list.append(pokemon)
+            if pokemon and pokemon not in booster_pck:
+                booster_pck.append(pokemon)
                 
-        return pokemon_list
+        return booster_pck
 
 
 
