@@ -26,13 +26,13 @@ class PokedexAPI:
         except requests.RequestException:
             # Default to total up to Gen 8 if API call fails
             return 898
-        
+
     # Get specific Pokémon (by ID) to loop later
     def get_pokes(self, pokemon_id: int) -> Optional[Pokemon]:
         try:
             response = self.session.get(
                 f"{self.url}/pokemon/{pokemon_id}",
-                timeout=69 #lol
+                timeout=69  #lol
             )
             response.raise_for_status()
             data = response.json()
@@ -42,19 +42,18 @@ class PokedexAPI:
                 id=data["id"],
                 types=[t["type"]["name"] for t in data["types"]]
             )
-            
         except requests.RequestException as e:
             print(f"Error: Could NOT fetch Pokemon API data: {e}", file=sys.stderr)
             return None
-        
+
     # Get 5 random Pokémon for booster that always includes Mew "DannyBimma 😏"
     def load_booster_pck(self, count: int, mew: bool = False) -> List[Pokemon]:
         booster_pck = []
         
         if mew:
-            mew = self.get_pokes(151)  # Mew Pokédex ID is 151
-            if mew:
-                booster_pck.append(mew)
+            mew_pokemon = self.get_pokes(151)  # Mew Pokédex ID is 151
+            if mew_pokemon:
+                booster_pck.append(mew_pokemon)
                 count -= 1  # Decrease number of Pokemon needed if Mew included
         
         while len(booster_pck) < count:
@@ -62,31 +61,29 @@ class PokedexAPI:
             pokemon = self.get_pokes(poke_id)
             if pokemon and pokemon not in booster_pck:
                 booster_pck.append(pokemon)
-                
+        
         return booster_pck
-    
 
 # Print Booster Packs
-def display_pck(pokemon_list: List[Pokemon]):
+def display_pck(booster_pck: List[Pokemon]):
     print("\n🎊 Booster Pack Opened 🎊\n")
     print("You got:")
-    for pokemon in pokemon_list:
+    for pokemon in booster_pck:
         types_str = "/".join(pokemon.types)
         print(f"• {pokemon.name} (#{pokemon.id}) - Type: {types_str}")
     print()
 
 def main():
     api = PokedexAPI()
-
     usr_name = input("Please enter your Pokémon TGCP username: ").strip()
-
-    if usr_name == "DannyBimma":
-        booster_pck = api.get_pokes(5, mew=True)
-    else:
-        booster_pck = api.get_pokes(5)
     
-    if pck:
-        display_pck(pck)
+    if usr_name == "DannyBimma":
+        booster_pck = api.load_booster_pck(5, mew=True)
+    else:
+        booster_pck = api.load_booster_pck(5)
+    
+    if booster_pck:
+        display_pck(booster_pck)
         return 0
     else:
         print("⛔️: Your Booster Pack was a dud, bud!! Do try again 🥹", file=sys.stderr)
