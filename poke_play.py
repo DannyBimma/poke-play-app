@@ -49,7 +49,7 @@ class PokedexAPI:
             return None
 
     # Ensure "DannyBimma" always gets Mew if available 😏
-    def load_booster_pck(self, count: int, mew: bool = False) -> List[Pokemon]:
+    def load_booster_pck(self, count: int, mew: bool = True) -> List[Pokemon]:
         booster_pck = []
         
         if mew:
