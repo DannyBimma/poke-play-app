@@ -4,16 +4,16 @@ A simple command-line application that uses the PokeAPI to simulate opening Pok�
 
 ## Features
 
-- Simulates opening a Pokémon Booster Pack containing 5 random Pokemon
+- Simulates opening a Pokémon Booster Pack containing 5 random Pokémon.
 - Special Easter egg for user "DannyBimma" that ensures he always gets Mew 🥹
 - Displays basic Pokémon information including:
   - Name
   - Pokédex number
   - Type
 
-## Prerequisites
+## Requirements
 
-Before running the application, ensure you have:
+Before running the application, your machine should have:
 
 - Python 3.6 or higher installed
 - pip (Python package manager)
@@ -56,13 +56,13 @@ python3 poke_play.py
 ./poke_play.py
 ```
 
-Follow the prompt to enter your username and the program will then "open" a Booster Pack and display what you got. Although, if your not DannyBimma your chances of getting Mew are next to impossible—a direct inverse of reality 🙃
+Follow the prompt, enter your Pokémon username, and the program will simulate a Booster Pack opening from the Pokémon TCGP game and display what you got. Although, if you're not "DannyBimma" your chances of getting Mew are next to impossible—a direct inverse of reality 🥲
 
 ## Code Structure
 
 ### Main Components
 
-1. `Pokemon` Class (Data Structure)
+1. `Pokemon` Data Class
 
    - Stores individual Pokémon information:
      - name (str)
@@ -73,8 +73,8 @@ Follow the prompt to enter your username and the program will then "open" a Boos
 
    - Handles all API interactions
    - Methods:
-     - `all_pokemon()`: Gets total number of available Pokemon
-     - `get_pokes()`: Fetches specific Pokemon by ID
+     - `all_pokemon()`: Gets total number of available Pokémon
+     - `get_pokes()`: Fetches specific Pokémon by ID
      - `load_booster_pck()`: Creates random booster pack
 
 3. Helper Functions
@@ -82,26 +82,26 @@ Follow the prompt to enter your username and the program will then "open" a Boos
 
 ### API Integration
 
-The application uses the [PokeAPI](https://pokeapi.co/), a free and open Pokemon data API. Specifically:
+The application uses the [PokeAPI](https://pokeapi.co/), a free and open Pokémon data API. Specifically:
 
-- Base URL: https://pokeapi.co/api/v2
+- API URL: https://pokeapi.co/api/v2
 - Endpoints used:
-  - `/pokemon`: Get total Pokemon count
-  - `/pokemon/{id}`: Get specific Pokemon data
+  - `/pokemon`: Get total Pokémon count
+  - `/pokemon/{id}`: Get specific Pokémon data
 
 ### Error Handling
 
-The application includes robust error handling for:
+The application includes basic error handling for:
 
 - API connection issues
-- Invalid Pokemon IDs
-- Timeout scenarios after 69 seconds 😜
+- Invalid Pokémon IDs
+- Timeout scenarios after 69 seconds; amiright 😜!!
 - Data parsing errors
 
 ## Example Output
 
 ```
-Please enter your Pokémon TGCP username: DannyBimma
+Please enter your Pokémon TCGP username: "DannyBimma"
 
 🎊 Booster Pack Opened 🎊
 
@@ -115,7 +115,7 @@ You got:
 
 ## Contributing
 
-Feel free to submit issues, fork the repository, and create pull requests for any improvements.
+Meh - feel free to submit issues, fork the repository, and create pull requests for any improvements or just do whatever your heart desires with this code, really... I'm over it 🙄
 
 ## License
 
@@ -123,5 +123,6 @@ Apache 2.0
 
 ## Credits
 
-- Pokemon data provided by [PokeAPI](https://pokeapi.co/)
+- Pokémon data provided by [PokeAPI](https://pokeapi.co/)
 - Created by Danny Bimma
+- For Danny Bimma
