@@ -45,10 +45,10 @@ class PokedexAPI:
                 types=[t["type"]["name"] for t in data["types"]]
             )
         except requests.RequestException as e:
-            print(f"Error: Could NOT fetch Pokemon API data: {e}", file=sys.stderr)
+            print(f"⛔️: Could NOT fetch Pokémon API data: {e}", file=sys.stderr)
             return None
 
-    # Get 5 random Pokémon for booster that always includes Mew "DannyBimma 😏"
+    # Ensure "DannyBimma" always gets Mew if available 😏
     def load_booster_pck(self, count: int, mew: bool = False) -> List[Pokemon]:
         booster_pck = []
         
@@ -56,7 +56,7 @@ class PokedexAPI:
             mew_pokemon = self.get_pokes(151)  # Mew Pokédex ID is 151
             if mew_pokemon:
                 booster_pck.append(mew_pokemon)
-                count -= 1  # Decrease number of Pokemon needed if Mew included
+                count -= 1  # Decrease number of Pokémon needed if Mew included
         
         while len(booster_pck) < count:
             poke_id = random.randint(1, self.all_de_pokemon)
@@ -77,7 +77,7 @@ def display_pck(booster_pck: List[Pokemon]):
 
 def main():
     api = PokedexAPI()
-    usr_name = input("Please enter your Pokémon TGCP username: ").strip()
+    usr_name = input("Please enter your Pokémon TCGP username: ").strip()
     
     if usr_name == "DannyBimma":
         booster_pck = api.load_booster_pck(5, mew=True)
